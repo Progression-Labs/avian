@@ -17,7 +17,7 @@
 
 use avian2d::prelude::*;
 use bevy::{camera::ScalingMode, input::common_conditions::input_just_pressed, prelude::*};
-use examples_common_2d::ExampleCommonPlugin;
+use examples_common_2d::{ExampleCommonPlugin, example_gravity};
 
 fn main() {
     App::new()
@@ -28,7 +28,7 @@ fn main() {
         ))
         .insert_resource(ClearColor(Color::srgb(0.05, 0.05, 0.1)))
         // Zero gravity, so the circles travel in straight lines until they collide.
-        .insert_resource(Gravity::ZERO)
+        .add_systems(Startup, example_gravity(Vec2::ZERO))
         .add_systems(Startup, (setup_camera, setup_scene))
         .add_systems(
             Update,

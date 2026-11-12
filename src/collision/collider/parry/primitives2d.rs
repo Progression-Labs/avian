@@ -6,7 +6,10 @@ use crate::{
 use super::{Collider, IntoCollider, ToF32Precision};
 use bevy::prelude::{Deref, DerefMut};
 use bevy_math::prelude::*;
-use bevy_shape::Bounded2d;
+use bevy_shape::{
+    Bounded2d, Capsule2d, Circle, ConvexPolygon, Ellipse, Line2d, Measured2d, Plane2d, Polygon,
+    Rectangle, RegularPolygon, Segment2d, Triangle2d,
+};
 use parry::{
     mass_properties::MassProperties,
     math::Pose,

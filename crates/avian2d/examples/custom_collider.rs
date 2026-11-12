@@ -4,7 +4,7 @@
 
 use avian2d::{collision::contact_types::PackedFeatureId, math::*, prelude::*};
 use bevy::prelude::*;
-use examples_common_2d::ExampleCommonPlugin;
+use examples_common_2d::{ExampleCommonPlugin, example_gravity};
 
 fn main() {
     App::new()
@@ -22,7 +22,7 @@ fn main() {
             NarrowPhasePlugin::<CircleCollider>::default(),
         ))
         .insert_resource(ClearColor(Color::srgb(0.01, 0.01, 0.025)))
-        .insert_resource(Gravity::ZERO)
+        .add_systems(Startup, example_gravity(Vec2::ZERO))
         .add_systems(Startup, setup)
         .add_systems(
             FixedUpdate,

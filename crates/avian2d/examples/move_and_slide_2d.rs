@@ -247,6 +247,10 @@ fn run_move_and_slide(
 ) {
     for (entity, mut transform, mut lin_vel, mut touched, collider) in &mut query {
         touched.clear();
+        // In the environment the character is in.
+        let Some(move_and_slide) = move_and_slide.for_entity(entity) else {
+            continue;
+        };
 
         // Perform move and slide
         let MoveAndSlideOutput {

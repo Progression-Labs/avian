@@ -24,6 +24,7 @@ use bevy::{
     input::common_conditions::input_pressed,
     prelude::*,
 };
+use examples_common_2d::{ExampleCommonPlugin, example_gravity};
 
 fn main() {
     let mut app = App::new();
@@ -33,6 +34,8 @@ fn main() {
     app.add_plugins((
         DefaultPlugins,
         PhysicsPlugins::default().with_length_unit(50.0),
+        // The environment the bodies are in.
+        ExampleCommonPlugin,
     ));
 
     // By default, interpolation must be enabled for each entity manually
@@ -43,7 +46,7 @@ fn main() {
     // app.add_plugins(PhysicsPlugins::default().set(PhysicsInterpolationPlugin::interpolate_all()));
 
     // Set gravity.
-    app.insert_resource(Gravity(Vec2::NEG_Y * 900.0));
+    app.add_systems(Startup, example_gravity(Vec2::NEG_Y * 900.0));
 
     // Set the fixed timestep to just 10 Hz for demonstration purposes.
     app.insert_resource(Time::from_hz(10.0));

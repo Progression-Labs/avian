@@ -12,7 +12,7 @@
 
 use avian2d::{math::*, prelude::*};
 use bevy::prelude::*;
-use examples_common_2d::ExampleCommonPlugin;
+use examples_common_2d::{ExampleCommonPlugin, example_gravity};
 
 fn main() {
     App::new()
@@ -22,7 +22,7 @@ fn main() {
             PhysicsPlugins::default(),
         ))
         .insert_resource(ClearColor(Color::srgb(0.05, 0.05, 0.1)))
-        .insert_resource(Gravity(Vec2::NEG_Y * 1000.0))
+        .add_systems(Startup, example_gravity(Vec2::NEG_Y * 1000.0))
         .add_systems(Startup, setup)
         .add_systems(Update, (control_motors, update_ui))
         .run();

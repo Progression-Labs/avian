@@ -170,14 +170,18 @@ fn update_grounded(
         let rotation = Rotation::from(global_transform.rotation());
 
         // Cast the shape downward to check for ground
-        let hit = spatial_query.cast_shape(
-            collider,
-            global_transform.translation().xy().real(),
-            rotation,
-            Dir2::new_unchecked(global_transform.down().xy()),
-            &ShapeCastConfig::from_max_distance(ground_detection.max_distance),
-            &SpatialQueryFilter::from_excluded_entities([entity]),
-        );
+        let hit = spatial_query
+            .environment_of(entity)
+            .and_then(|environment| {
+                spatial_query.in_environment(environment).cast_shape(
+                    collider,
+                    global_transform.translation().xy().real(),
+                    rotation,
+                    Dir2::new_unchecked(global_transform.down().xy()),
+                    &ShapeCastConfig::from_max_distance(ground_detection.max_distance),
+                    &SpatialQueryFilter::from_excluded_entities([entity]),
+                )
+            });
 
         // The character is grounded if we hit a surface that isn't too steep
         let is_grounded = hit.is_some_and(|hit| {
@@ -289,6 +293,10 @@ fn move_and_slide(
         &mut query
     {
         let mut hit_ground_or_ceiling = false;
+        // In the environment the character is in.
+        let Some(move_and_slide) = move_and_slide.for_entity(entity) else {
+            continue;
+        };
 
         if let Some(collisions) = &mut collisions {
             // Clear previous collisions

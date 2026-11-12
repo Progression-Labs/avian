@@ -4,12 +4,54 @@ use bevy::{
     prelude::*,
 };
 
+/// The [`PhysicsEnvironment`] an example's bodies and colliders are in. There is no default
+/// environment: [`ExampleCommonPlugin`] makes this one and puts every rigid body and collider
+/// spawned without a parent under it, so an example spawns at the root and names the
+/// environment only for what is its own: its `Gravity` ([`example_gravity`]), a spatial query
+/// (`spatial_query.in_environment(environment.0)`).
+#[derive(Resource, Clone, Copy)]
+pub struct ExampleEnvironment(pub Entity);
+
+/// A startup system that sets the [`ExampleEnvironment`]'s gravity.
+pub fn example_gravity(gravity: Vec2) -> impl Fn(Res<ExampleEnvironment>, Commands) {
+    move |environment: Res<ExampleEnvironment>, mut commands: Commands| {
+        commands
+            .entity(environment.0)
+            .insert(Gravity(gravity.into()));
+    }
+}
+
+fn adopt<C: Component>(
+    add: On<Add<C>>,
+    environment: Res<ExampleEnvironment>,
+    parents: Query<(), With<ChildOf>>,
+    mut commands: Commands,
+) {
+    if add.entity != environment.0 && !parents.contains(add.entity) {
+        commands.entity(add.entity).insert(ChildOf(environment.0));
+    }
+}
+
 /// A plugin that adds common functionality used by examples,
 /// such as physics diagnostics UI and the ability to pause and step the simulation.
 pub struct ExampleCommonPlugin;
 
 impl Plugin for ExampleCommonPlugin {
     fn build(&self, app: &mut App) {
+        // The environment everything the example spawns at the root goes into.
+        let environment = app
+            .world_mut()
+            .spawn((
+                PhysicsEnvironment,
+                Transform::default(),
+                Visibility::default(),
+                Name::new("Example environment"),
+            ))
+            .id();
+        app.insert_resource(ExampleEnvironment(environment));
+        app.add_observer(adopt::<RigidBody>);
+        app.add_observer(adopt::<Collider>);
+
         // Add diagnostics.
         app.add_plugins((
             PhysicsDiagnosticsPlugin,

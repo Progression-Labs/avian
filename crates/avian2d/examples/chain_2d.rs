@@ -2,7 +2,7 @@
 
 use avian2d::prelude::*;
 use bevy::{prelude::*, window::PrimaryWindow};
-use examples_common_2d::ExampleCommonPlugin;
+use examples_common_2d::{ExampleCommonPlugin, example_gravity};
 
 fn main() {
     App::new()
@@ -13,7 +13,7 @@ fn main() {
         ))
         .insert_resource(ClearColor(Color::srgb(0.05, 0.05, 0.1)))
         .insert_resource(SubstepCount(50))
-        .insert_resource(Gravity(Vec2::NEG_Y * 1000.0))
+        .add_systems(Startup, example_gravity(Vec2::NEG_Y * 1000.0))
         .add_systems(Startup, setup)
         .add_systems(Update, follow_mouse)
         .run();

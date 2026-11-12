@@ -25,7 +25,7 @@ use bevy::{
         slider_self_update,
     },
 };
-use examples_common_3d::ExampleCommonPlugin;
+use examples_common_3d::{ExampleCommonPlugin, example_gravity};
 use rand::RngExt;
 
 fn main() {
@@ -72,7 +72,7 @@ fn main() {
     )
     .insert_resource(UiTheme(create_dark_theme()))
     .init_resource::<BvhExampleSettings>()
-    .insert_resource(Gravity::ZERO);
+    .add_systems(Startup, example_gravity(Vec3::ZERO));
 
     // Add systems for setting up and running the example.
     app.add_systems(Startup, (setup_scene, setup_ui))
@@ -217,7 +217,7 @@ fn setup_ui(mut commands: Commands, settings: Res<BvhExampleSettings>) {
                                 (Entity, &OptimizationModeRadio),
                                 With<RadioButton>,
                             >,
-                             mut settings: ResMut<ColliderTreeOptimization>,
+                             mut settings: Single<&mut ColliderTreeOptimization>,
                              mut commands: Commands| {
                                 for (entity, optimization_mode) in radio_buttons.iter() {
                                     if entity == value_change.value {

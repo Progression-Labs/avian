@@ -2,7 +2,7 @@
 
 use avian3d::{math::*, prelude::*};
 use bevy::{color::palettes::css::RED, light::NotShadowReceiver, prelude::*};
-use examples_common_3d::ExampleCommonPlugin;
+use examples_common_3d::{ExampleCommonPlugin, ExampleEnvironment};
 
 fn main() {
     App::new()
@@ -142,6 +142,7 @@ fn reset_colors(
 
 fn raycast(
     query: SpatialQuery,
+    environment: Res<ExampleEnvironment>,
     mut materials: ResMut<Assets<StandardMaterial>>,
     cubes: Query<(&MeshMaterial3d<StandardMaterial>, &OutOfGlass)>,
     mut indicator_transform: Single<&mut Transform, With<RayIndicator>>,
@@ -150,7 +151,7 @@ fn raycast(
     let direction = Dir3::X;
     let filter = SpatialQueryFilter::default();
 
-    if let Some(ray_hit_data) = query.cast_ray_predicate(
+    if let Some(ray_hit_data) = query.in_environment(environment.0).cast_ray_predicate(
         origin.real(),
         direction,
         f32::MAX,

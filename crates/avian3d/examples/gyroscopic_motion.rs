@@ -14,7 +14,7 @@
 use avian3d::prelude::*;
 use bevy::prelude::*;
 use core::f32::consts::FRAC_PI_2;
-use examples_common_3d::ExampleCommonPlugin;
+use examples_common_3d::{ExampleCommonPlugin, example_gravity};
 
 fn main() {
     App::new()
@@ -23,7 +23,7 @@ fn main() {
             ExampleCommonPlugin,
             PhysicsPlugins::default(),
         ))
-        .insert_resource(Gravity::ZERO)
+        .add_systems(Startup, example_gravity(Vec3::ZERO))
         .add_systems(Startup, setup)
         .add_systems(FixedUpdate, log_racket_angular_momentum)
         .run();

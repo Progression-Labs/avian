@@ -75,9 +75,10 @@ impl Plugin for BruteForceBroadPhasePlugin {
 fn collect_collision_pairs(
     colliders: Query<(Entity, &ColliderAabb, &ColliderOf)>,
     bodies: Query<&RigidBody>,
-    mut contact_graph: ResMut<ContactGraph>,
-    joint_graph: Res<JointGraph>,
+    // The one environment's graphs: the example has a single environment.
+    mut graphs: Single<(&mut ContactGraph, &JointGraph), With<PhysicsEnvironment>>,
 ) {
+    let (contact_graph, joint_graph) = &mut *graphs;
     // Loop through all entity combinations and create contact pairs for overlapping AABBs.
     for [
         (collider1, aabb1, collider_of1),

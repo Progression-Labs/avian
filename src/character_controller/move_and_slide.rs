@@ -482,7 +482,8 @@ impl EnvironmentMoveAndSlide<'_, '_, '_> {
     /// fn perform_move_and_slide(
     ///     player: Single<(Entity, &Collider, &mut CharacterController, &mut Transform)>,
     ///     move_and_slide: MoveAndSlide,
-    ///     time: Res<Time>
+    ///     time: Res<Time>,
+    ///     environment: Single<Entity, With<PhysicsEnvironment>>,
     /// ) {
     ///     let (entity, collider, mut controller, mut transform) = player.into_inner();
     #[cfg_attr(
@@ -495,7 +496,7 @@ impl EnvironmentMoveAndSlide<'_, '_, '_> {
     )]
     ///     let filter = SpatialQueryFilter::from_excluded_entities([entity]);
     ///     let mut collisions = HashSet::new();
-    ///     let out = move_and_slide.in_environment(environment).move_and_slide(
+    ///     let out = move_and_slide.in_environment(*environment).move_and_slide(
     ///         collider,
     #[cfg_attr(feature = "2d", doc = "        transform.translation.xy().real(),")]
     #[cfg_attr(feature = "3d", doc = "        transform.translation.real(),")]
@@ -727,14 +728,15 @@ impl EnvironmentMoveAndSlide<'_, '_, '_> {
     /// fn perform_cast_move(
     ///     player: Single<(Entity, &Collider, &mut CharacterController, &mut Transform)>,
     ///     move_and_slide: MoveAndSlide,
-    ///     time: Res<Time>
+    ///     time: Res<Time>,
+    ///     environment: Single<Entity, With<PhysicsEnvironment>>,
     /// ) {
     ///     let (entity, collider, mut controller, mut transform) = player.into_inner();
     ///     let filter = SpatialQueryFilter::from_excluded_entities([entity]);
     ///     let config = MoveAndSlideConfig::default();
     ///
     ///     // Ensure that the character is not intersecting with any colliders.
-    ///     let offset = move_and_slide.in_environment(environment).depenetrate(
+    ///     let offset = move_and_slide.in_environment(*environment).depenetrate(
     ///         collider,
     #[cfg_attr(feature = "2d", doc = "        transform.translation.xy().real(),")]
     #[cfg_attr(feature = "3d", doc = "        transform.translation.real(),")]
@@ -753,7 +755,7 @@ impl EnvironmentMoveAndSlide<'_, '_, '_> {
     #[cfg_attr(feature = "3d", doc = "    transform.translation += offset;")]
     ///     let velocity = controller.velocity;
     ///
-    ///     let hit = move_and_slide.in_environment(environment).cast_move(
+    ///     let hit = move_and_slide.in_environment(*environment).cast_move(
     ///         collider,
     #[cfg_attr(feature = "2d", doc = "        transform.translation.xy().real(),")]
     #[cfg_attr(feature = "3d", doc = "        transform.translation.real(),")]
@@ -885,12 +887,13 @@ impl EnvironmentMoveAndSlide<'_, '_, '_> {
     /// fn depenetrate_player(
     ///     player: Single<(Entity, &Collider, &mut Transform)>,
     ///     move_and_slide: MoveAndSlide,
-    ///     time: Res<Time>
+    ///     time: Res<Time>,
+    ///     environment: Single<Entity, With<PhysicsEnvironment>>,
     /// ) {
     ///     let (entity, collider, mut transform) = player.into_inner();
     ///     let filter = SpatialQueryFilter::from_excluded_entities([entity]);
     ///
-    ///     let offset = move_and_slide.in_environment(environment).depenetrate(
+    ///     let offset = move_and_slide.in_environment(*environment).depenetrate(
     ///         collider,
     #[cfg_attr(feature = "2d", doc = "        transform.translation.xy().real(),")]
     #[cfg_attr(feature = "3d", doc = "        transform.translation.real(),")]
@@ -984,14 +987,15 @@ impl EnvironmentMoveAndSlide<'_, '_, '_> {
     /// fn depenetrate_player_manually(
     ///     player: Single<(Entity, &Collider, &mut Transform)>,
     ///     move_and_slide: MoveAndSlide,
-    ///     time: Res<Time>
+    ///     time: Res<Time>,
+    ///     environment: Single<Entity, With<PhysicsEnvironment>>,
     /// ) {
     ///     let (entity, collider, mut transform) = player.into_inner();
     ///     let filter = SpatialQueryFilter::from_excluded_entities([entity]);
     ///     let config = DepenetrationConfig::default();
     ///
     ///     let mut intersections = Vec::new();
-    ///     move_and_slide.in_environment(environment).intersections(
+    ///     move_and_slide.in_environment(*environment).intersections(
     ///         collider,
     #[cfg_attr(feature = "2d", doc = "        transform.translation.xy().real(),")]
     #[cfg_attr(feature = "3d", doc = "        transform.translation.real(),")]
@@ -1007,7 +1011,7 @@ impl EnvironmentMoveAndSlide<'_, '_, '_> {
     ///             true
     ///         },
     ///     );
-    ///     let offset = move_and_slide.in_environment(environment).depenetrate_intersections(&config, &intersections);
+    ///     let offset = move_and_slide.in_environment(*environment).depenetrate_intersections(&config, &intersections);
     #[cfg_attr(
         feature = "2d",
         doc = "    transform.translation += offset.extend(0.0);"

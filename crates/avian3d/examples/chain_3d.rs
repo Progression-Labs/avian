@@ -2,7 +2,7 @@
 
 use avian3d::prelude::*;
 use bevy::prelude::*;
-use examples_common_3d::ExampleCommonPlugin;
+use examples_common_3d::{ExampleCommonPlugin, example_gravity};
 
 fn main() {
     App::new()
@@ -17,7 +17,7 @@ fn main() {
             ..default()
         })
         .insert_resource(SubstepCount(80))
-        .insert_resource(Gravity(Vec3::NEG_Y * 9.81 * 2.0))
+        .add_systems(Startup, example_gravity(Vec3::NEG_Y * 9.81 * 2.0))
         .add_systems(Startup, (setup, ui))
         .add_systems(Update, movement)
         .run();

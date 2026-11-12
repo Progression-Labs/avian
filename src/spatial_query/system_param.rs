@@ -37,7 +37,7 @@ use parry::query::ShapeCastOptions;
 /// use bevy::prelude::*;
 ///
 /// # #[cfg(feature = "3d")]
-/// fn print_hits(spatial_query: SpatialQuery) {
+/// fn print_hits(spatial_query: SpatialQuery, environment: Single<Entity, With<PhysicsEnvironment>>) {
 ///     // Ray origin and direction
 ///     let origin = RVec3::ZERO;
 ///     let direction = Dir3::X;
@@ -48,12 +48,12 @@ use parry::query::ShapeCastOptions;
 ///     let filter = SpatialQueryFilter::default();
 ///
 ///     // Cast ray and print first hit
-///     if let Some(first_hit) = spatial_query.in_environment(environment).cast_ray(origin, direction, max_distance, solid, &filter) {
+///     if let Some(first_hit) = spatial_query.in_environment(*environment).cast_ray(origin, direction, max_distance, solid, &filter) {
 ///         println!("First hit: {:?}", first_hit);
 ///     }
 ///
 ///     // Cast ray and get up to 20 hits
-///     let hits = spatial_query.in_environment(environment).ray_hits(origin, direction, max_distance, 20, solid, &filter);
+///     let hits = spatial_query.in_environment(*environment).ray_hits(origin, direction, max_distance, 20, solid, &filter);
 ///
 ///     // Print hits
 ///     for hit in hits.iter() {
@@ -146,7 +146,7 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     /// use bevy::prelude::*;
     ///
     /// # #[cfg(feature = "3d")]
-    /// fn print_hits(spatial_query: SpatialQuery) {
+    /// fn print_hits(spatial_query: SpatialQuery, environment: Single<Entity, With<PhysicsEnvironment>>) {
     ///     // Ray origin and direction
     ///     let origin = RVec3::ZERO;
     ///     let direction = Dir3::X;
@@ -157,7 +157,7 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     ///     let filter = SpatialQueryFilter::default();
     ///
     ///     // Cast ray and print first hit
-    ///     if let Some(first_hit) = spatial_query.in_environment(environment).cast_ray(origin, direction, max_distance, solid, &filter) {
+    ///     if let Some(first_hit) = spatial_query.in_environment(*environment).cast_ray(origin, direction, max_distance, solid, &filter) {
     ///         println!("First hit: {:?}", first_hit);
     ///     }
     /// }
@@ -216,7 +216,7 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     /// struct Invisible;
     ///
     /// # #[cfg(feature = "3d")]
-    /// fn print_hits(spatial_query: SpatialQuery, query: Query<&Invisible>) {
+    /// fn print_hits(spatial_query: SpatialQuery, query: Query<&Invisible>, environment: Single<Entity, With<PhysicsEnvironment>>) {
     ///     // Ray origin and direction
     ///     let origin = RVec3::ZERO;
     ///     let direction = Dir3::X;
@@ -227,7 +227,7 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     ///     let filter = SpatialQueryFilter::default();
     ///
     ///     // Cast ray and get the first hit that matches the predicate
-    ///     let hit = spatial_query.in_environment(environment).cast_ray_predicate(origin, direction, max_distance, solid, &filter, &|entity| {
+    ///     let hit = spatial_query.in_environment(*environment).cast_ray_predicate(origin, direction, max_distance, solid, &filter, &|entity| {
     ///         // Skip entities with the `Invisible` component.
     ///         !query.contains(entity)
     ///     });
@@ -320,7 +320,7 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     /// use bevy::prelude::*;
     ///
     /// # #[cfg(feature = "3d")]
-    /// fn print_hits(spatial_query: SpatialQuery) {
+    /// fn print_hits(spatial_query: SpatialQuery, environment: Single<Entity, With<PhysicsEnvironment>>) {
     ///     // Ray origin and direction
     ///     let origin = RVec3::ZERO;
     ///     let direction = Dir3::X;
@@ -331,7 +331,7 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     ///     let filter = SpatialQueryFilter::default();
     ///
     ///     // Cast ray and get up to 20 hits
-    ///     let hits = spatial_query.in_environment(environment).ray_hits(origin, direction, max_distance, 20, solid, &filter);
+    ///     let hits = spatial_query.in_environment(*environment).ray_hits(origin, direction, max_distance, 20, solid, &filter);
     ///
     ///     // Print hits
     ///     for hit in hits.iter() {
@@ -401,7 +401,7 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     /// use bevy::prelude::*;
     ///
     /// # #[cfg(feature = "3d")]
-    /// fn print_hits(spatial_query: SpatialQuery) {
+    /// fn print_hits(spatial_query: SpatialQuery, environment: Single<Entity, With<PhysicsEnvironment>>) {
     ///     // Ray origin and direction
     ///     let origin = RVec3::ZERO;
     ///     let direction = Dir3::X;
@@ -413,7 +413,7 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     ///
     ///     // Cast ray and get up to 20 hits
     ///     let mut hits = vec![];
-    ///     spatial_query.in_environment(environment).ray_hits_callback(origin, direction, max_distance, solid, &filter, |hit| {
+    ///     spatial_query.in_environment(*environment).ray_hits_callback(origin, direction, max_distance, solid, &filter, |hit| {
     ///         hits.push(hit);
     ///         hits.len() < 20
     ///     });
@@ -497,7 +497,7 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     /// use bevy::prelude::*;
     ///
     /// # #[cfg(feature = "3d")]
-    /// fn print_hits(spatial_query: SpatialQuery) {
+    /// fn print_hits(spatial_query: SpatialQuery, environment: Single<Entity, With<PhysicsEnvironment>>) {
     ///     // Shape properties
     ///     let shape = Collider::sphere(0.5);
     ///     let origin = RVec3::ZERO;
@@ -509,7 +509,7 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     ///     let filter = SpatialQueryFilter::default();
     ///
     ///     // Cast shape and print first hit
-    ///     if let Some(first_hit) = spatial_query.in_environment(environment).cast_shape(&shape, origin, rotation, direction, &config, &filter)
+    ///     if let Some(first_hit) = spatial_query.in_environment(*environment).cast_shape(&shape, origin, rotation, direction, &config, &filter)
     ///     {
     ///         println!("First hit: {:?}", first_hit);
     ///     }
@@ -585,7 +585,7 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     /// struct Invisible;
     ///
     /// # #[cfg(feature = "3d")]
-    /// fn print_hits(spatial_query: SpatialQuery, query: Query<&Invisible>) {
+    /// fn print_hits(spatial_query: SpatialQuery, query: Query<&Invisible>, environment: Single<Entity, With<PhysicsEnvironment>>) {
     ///     // Shape properties
     ///     let shape = Collider::sphere(0.5);
     ///     let origin = RVec3::ZERO;
@@ -597,7 +597,7 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     ///     let filter = SpatialQueryFilter::default();
     ///
     ///     // Cast shape and get the first hit that matches the predicate
-    ///     let hit = spatial_query.in_environment(environment).cast_shape_predicate(&shape, origin, rotation, direction, &config, &filter, &|entity| {
+    ///     let hit = spatial_query.in_environment(*environment).cast_shape_predicate(&shape, origin, rotation, direction, &config, &filter, &|entity| {
     ///        // Skip entities with the `Invisible` component.
     ///        !query.contains(entity)
     ///     });
@@ -717,7 +717,7 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     /// use bevy::prelude::*;
     ///
     /// # #[cfg(feature = "3d")]
-    /// fn print_hits(spatial_query: SpatialQuery) {
+    /// fn print_hits(spatial_query: SpatialQuery, environment: Single<Entity, With<PhysicsEnvironment>>) {
     ///     // Shape properties
     ///     let shape = Collider::sphere(0.5);
     ///     let origin = RVec3::ZERO;
@@ -729,7 +729,7 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     ///     let filter = SpatialQueryFilter::default();
     ///
     ///     // Cast shape and get up to 20 hits
-    ///     let hits = spatial_query.in_environment(environment).shape_hits(&shape, origin, rotation, direction, 20, &config, &filter);
+    ///     let hits = spatial_query.in_environment(*environment).shape_hits(&shape, origin, rotation, direction, 20, &config, &filter);
     ///
     ///     // Print hits
     ///     for hit in hits.iter() {
@@ -814,7 +814,7 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     /// use bevy::prelude::*;
     ///
     /// # #[cfg(feature = "3d")]
-    /// fn print_hits(spatial_query: SpatialQuery) {
+    /// fn print_hits(spatial_query: SpatialQuery, environment: Single<Entity, With<PhysicsEnvironment>>) {
     ///     // Shape properties
     ///     let shape = Collider::sphere(0.5);
     ///     let origin = RVec3::ZERO;
@@ -827,7 +827,7 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     ///
     ///     // Cast shape and get up to 20 hits
     ///     let mut hits = vec![];
-    ///     spatial_query.in_environment(environment).shape_hits_callback(&shape, origin, rotation, direction, &config, &filter, |hit| {
+    ///     spatial_query.in_environment(*environment).shape_hits_callback(&shape, origin, rotation, direction, &config, &filter, |hit| {
     ///         hits.push(hit);
     ///         hits.len() < 20
     ///     });
@@ -932,9 +932,9 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     /// use bevy::prelude::*;
     ///
     /// # #[cfg(feature = "3d")]
-    /// fn print_point_projection(spatial_query: SpatialQuery) {
+    /// fn print_point_projection(spatial_query: SpatialQuery, environment: Single<Entity, With<PhysicsEnvironment>>) {
     ///     // Project a point and print the result
-    ///     if let Some(projection) = spatial_query.in_environment(environment).project_point(
+    ///     if let Some(projection) = spatial_query.in_environment(*environment).project_point(
     ///         RVec3::ZERO,                   // Point
     ///         true,                          // Are colliders treated as "solid"
     ///         &SpatialQueryFilter::default(),// Query filter
@@ -990,9 +990,9 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     /// struct Invisible;
     ///
     /// # #[cfg(feature = "3d")]
-    /// fn print_point_projection(spatial_query: SpatialQuery, query: Query<&Invisible>) {
+    /// fn print_point_projection(spatial_query: SpatialQuery, query: Query<&Invisible>, environment: Single<Entity, With<PhysicsEnvironment>>) {
     ///     // Project a point and print the result
-    ///     if let Some(projection) = spatial_query.in_environment(environment).project_point_predicate(
+    ///     if let Some(projection) = spatial_query.in_environment(*environment).project_point_predicate(
     ///         RVec3::ZERO,                    // Point
     ///         true,                           // Are colliders treated as "solid"
     ///         &SpatialQueryFilter::default(), // Query filter
@@ -1067,9 +1067,9 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     /// use bevy::prelude::*;
     ///
     /// # #[cfg(feature = "3d")]
-    /// fn print_point_intersections(spatial_query: SpatialQuery) {
+    /// fn print_point_intersections(spatial_query: SpatialQuery, environment: Single<Entity, With<PhysicsEnvironment>>) {
     ///     let intersections =
-    ///         spatial_query.in_environment(environment).point_intersections(RVec3::ZERO, &SpatialQueryFilter::default());
+    ///         spatial_query.in_environment(*environment).point_intersections(RVec3::ZERO, &SpatialQueryFilter::default());
     ///
     ///     for entity in intersections.iter() {
     ///         println!("Entity: {}", entity);
@@ -1111,10 +1111,10 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     /// use bevy::prelude::*;
     ///
     /// # #[cfg(feature = "3d")]
-    /// fn print_point_intersections(spatial_query: SpatialQuery) {
+    /// fn print_point_intersections(spatial_query: SpatialQuery, environment: Single<Entity, With<PhysicsEnvironment>>) {
     ///     let mut intersections = vec![];
     ///     
-    ///     spatial_query.in_environment(environment).point_intersections_callback(
+    ///     spatial_query.in_environment(*environment).point_intersections_callback(
     ///         RVec3::ZERO,                    // Point
     ///         &SpatialQueryFilter::default(), // Query filter
     ///         |entity| {                      // Callback function
@@ -1172,9 +1172,9 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     /// use bevy::prelude::*;
     ///
     /// # #[cfg(feature = "3d")]
-    /// fn print_aabb_intersections(spatial_query: SpatialQuery) {
+    /// fn print_aabb_intersections(spatial_query: SpatialQuery, environment: Single<Entity, With<PhysicsEnvironment>>) {
     ///     let aabb = Collider::sphere(0.5).aabb(RVec3::ZERO, Quat::default(), 0.0);
-    ///     let intersections = spatial_query.in_environment(environment).aabb_intersections_with_aabb(aabb);
+    ///     let intersections = spatial_query.in_environment(*environment).aabb_intersections_with_aabb(aabb);
     ///
     ///     for entity in intersections.iter() {
     ///         println!("Entity: {}", entity);
@@ -1210,10 +1210,10 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     /// use bevy::prelude::*;
     ///
     /// # #[cfg(feature = "3d")]
-    /// fn print_aabb_intersections(spatial_query: SpatialQuery) {
+    /// fn print_aabb_intersections(spatial_query: SpatialQuery, environment: Single<Entity, With<PhysicsEnvironment>>) {
     ///     let mut intersections = vec![];
     ///
-    ///     spatial_query.in_environment(environment).aabb_intersections_with_aabb_callback(
+    ///     spatial_query.in_environment(*environment).aabb_intersections_with_aabb_callback(
     ///         Collider::sphere(0.5).aabb(RVec3::ZERO, Quat::default(), 0.0),
     ///         |entity| {
     ///             intersections.push(entity);
@@ -1272,8 +1272,8 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     /// use bevy::prelude::*;
     ///
     /// # #[cfg(feature = "3d")]
-    /// fn print_shape_intersections(spatial_query: SpatialQuery) {
-    ///     let intersections = spatial_query.in_environment(environment).shape_intersections(
+    /// fn print_shape_intersections(spatial_query: SpatialQuery, environment: Single<Entity, With<PhysicsEnvironment>>) {
+    ///     let intersections = spatial_query.in_environment(*environment).shape_intersections(
     ///         &Collider::sphere(0.5),          // Shape
     ///         RVec3::ZERO,                     // Shape position
     ///         Quat::default(),                 // Shape rotation
@@ -1344,10 +1344,10 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
     /// use bevy::prelude::*;
     ///
     /// # #[cfg(feature = "3d")]
-    /// fn print_shape_intersections(spatial_query: SpatialQuery) {
+    /// fn print_shape_intersections(spatial_query: SpatialQuery, environment: Single<Entity, With<PhysicsEnvironment>>) {
     ///     let mut intersections = vec![];
     ///
-    ///     spatial_query.in_environment(environment).shape_intersections_callback(
+    ///     spatial_query.in_environment(*environment).shape_intersections_callback(
     ///         &Collider::sphere(0.5),          // Shape
     ///         RVec3::ZERO,                     // Shape position
     ///         Quat::default(),                 // Shape rotation

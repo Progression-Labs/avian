@@ -226,6 +226,10 @@ fn run_move_and_slide(
 ) {
     for (entity, mut transform, mut lin_vel, mut touched, collider) in &mut query {
         touched.clear();
+        // In the environment the character is in.
+        let Some(move_and_slide) = move_and_slide.for_entity(entity) else {
+            continue;
+        };
 
         // Perform move and slide
         let MoveAndSlideOutput {
@@ -282,13 +286,18 @@ fn update_camera_transform(
     camera.rotation = Quat::from_euler(EulerRot::YXZ, yaw, pitch, roll);
     const MAX_DISTANCE: f32 = 15.0;
     camera.translation = player_transform.translation + camera.back() * MAX_DISTANCE;
-    if let Some(hit) = spatial.cast_ray(
-        player_transform.translation.real(),
-        camera.back(),
-        MAX_DISTANCE,
-        true,
-        &SpatialQueryFilter::from_excluded_entities([player_entity]),
-    ) {
+    if let Some(hit) = spatial
+        .environment_of(player_entity)
+        .and_then(|environment| {
+            spatial.in_environment(environment).cast_ray(
+                player_transform.translation.real(),
+                camera.back(),
+                MAX_DISTANCE,
+                true,
+                &SpatialQueryFilter::from_excluded_entities([player_entity]),
+            )
+        })
+    {
         camera.translation = player_transform.translation
             + camera.back() * (hit.distance.val_num_f32() - 1.0).max(0.0);
     }

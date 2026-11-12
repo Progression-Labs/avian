@@ -135,15 +135,20 @@ pub type IntegrationSet = IntegrationSystems;
 /// fn main() {
 ///     App::new()
 ///         .add_plugins((DefaultPlugins, PhysicsPlugins::default()))
+///         .add_systems(Startup, setup)
+///         .run();
+/// }
+///
+/// fn setup(mut commands: Commands) {
+///     // Gravity is a setting of a `PhysicsEnvironment`: what is under it falls this way.
 #[cfg_attr(
     feature = "2d",
-    doc = "        .insert_resource(Gravity(Vec2::NEG_Y * 100.0))"
+    doc = "    commands.spawn((PhysicsEnvironment, Gravity(Vec2::NEG_Y * 100.0)));"
 )]
 #[cfg_attr(
     feature = "3d",
-    doc = "        .insert_resource(Gravity(Vec3::NEG_Y * 19.6))"
+    doc = "    commands.spawn((PhysicsEnvironment, Gravity(Vec3::NEG_Y * 19.6)));"
 )]
-///         .run();
 /// }
 /// ```
 ///

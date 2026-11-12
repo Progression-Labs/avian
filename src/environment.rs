@@ -390,7 +390,6 @@ fn transfer(
         return; // Already in the target world.
     }
 
-
     // --- 1. Remove collider proxy from old environment's tree ---
     // The entity and its body's colliders, each once (its own collider is in `RigidBodyColliders`
     // too: added twice, one proxy was orphaned), even when the body has no collider of its own.

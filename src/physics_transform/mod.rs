@@ -295,8 +295,7 @@ impl TransformSync<'_, '_> {
                 this_run,
             );
         if position_added
-            || !position_changed
-                && position.abs_diff_ne(&transform_translation, distance_tolerance)
+            || !position_changed && position.abs_diff_ne(&transform_translation, distance_tolerance)
         {
             position.0 = transform_translation;
         }
@@ -576,7 +575,15 @@ type FrameAncestors<'w, 's> = Query<
 >;
 
 /// Ancestor bodies' environment poses (their scale from the propagated transform).
-type BodyFrames<'w, 's> = Query<'w, 's, (&'static Position, &'static Rotation, &'static GlobalTransform)>;
+type BodyFrames<'w, 's> = Query<
+    'w,
+    's,
+    (
+        &'static Position,
+        &'static Rotation,
+        &'static GlobalTransform,
+    ),
+>;
 
 /// The ancestors' transforms a child's [`Position`] composes through, nearest first (the
 /// walk [`compose_to_physics_world`] takes past the child itself).

@@ -140,9 +140,16 @@ fn despawned_prop_leaves_no_collider() {
     app.world_mut().entity_mut(prop).despawn();
     step(&mut app, 60);
     assert!(app.world().get_entity(collider).is_err());
-    assert_eq!(proxies_of(&app, env, collider), 0, "the prop's proxy is gone");
+    assert_eq!(
+        proxies_of(&app, env, collider),
+        0,
+        "the prop's proxy is gone"
+    );
     let now = app.world().get::<Position>(crate_).unwrap().y;
-    assert!(now < rest - 1.0, "the crate falls where the prop was: {rest} -> {now}");
+    assert!(
+        now < rest - 1.0,
+        "the crate falls where the prop was: {rest} -> {now}"
+    );
 }
 
 /// A parent rotation that is not exactly unit (a scene file written to four decimals has norm
@@ -164,7 +171,16 @@ fn non_unit_parent_rotation_does_not_drift_a_static_child() {
             ChildOf(env),
         ))
         .id();
-    assert!((app.world().get::<Transform>(prop).unwrap().rotation.length() - 1.0).abs() > 1e-5);
+    assert!(
+        (app.world()
+            .get::<Transform>(prop)
+            .unwrap()
+            .rotation
+            .length()
+            - 1.0)
+            .abs()
+            > 1e-5
+    );
     let local = Vec3::new(0.02, 15.7, -0.23);
     let child = app
         .world_mut()
@@ -182,7 +198,11 @@ fn non_unit_parent_rotation_does_not_drift_a_static_child() {
         "the child drifted from {local} to {} in 240 steps",
         now.translation
     );
-    assert!((now.rotation.length() - 1.0).abs() < 1e-4, "rotation norm {}", now.rotation.length());
+    assert!(
+        (now.rotation.length() - 1.0).abs() < 1e-4,
+        "rotation norm {}",
+        now.rotation.length()
+    );
 }
 
 /// Frames, of `frames` after ten to settle in, in which `collider`'s bounds changed.
@@ -264,10 +284,7 @@ fn static_child_rests(hierarchy_moves: bool) {
         let env = environment(&mut app);
         let tile = app
             .world_mut()
-            .spawn((
-                Transform::from_translation(tile),
-                ChildOf(env),
-            ))
+            .spawn((Transform::from_translation(tile), ChildOf(env)))
             .id();
         let prop = app
             .world_mut()
@@ -292,7 +309,11 @@ fn static_child_rests(hierarchy_moves: bool) {
             "{what} (hierarchy_moves {hierarchy_moves}): its bounds changed in {moved} of 120 \
              frames; its Transform is now {local:?}"
         );
-        assert_eq!(local, Transform::default(), "{what}: its Transform was rewritten");
+        assert_eq!(
+            local,
+            Transform::default(),
+            "{what}: its Transform was rewritten"
+        );
     }
 }
 

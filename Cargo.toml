@@ -13,11 +13,11 @@ opt-level = 1 # Use slightly better optimization, so examples work
 
 # Use the locally ported bevy-main worktrees for the bevy-coupled crates —
 # the slyedoc GitHub branches lag behind the local ports.
-[patch."https://github.com/slyedoc/bevy_heavy"]
+[patch."https://github.com/Progression-Labs/bevy_heavy"]
 bevy_heavy = { path = "/mnt/code/f/bevy_heavy-main" }
 
-[patch."https://github.com/slyedoc/bevy_transform_interpolation"]
+[patch."https://github.com/Progression-Labs/bevy_transform_interpolation"]
 bevy_transform_interpolation = { path = "/mnt/code/f/bevy_transform_interpolation-main" }
 
-[patch."https://github.com/slyedoc/glam_matrix_extras"]
+[patch."https://github.com/Progression-Labs/glam_matrix_extras"]
 glam_matrix_extras = { path = "/mnt/code/f/glam_matrix_extras" }

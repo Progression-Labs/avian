@@ -836,6 +836,7 @@ mod tests {
 
     #[test]
     #[should_panic]
+    #[cfg_attr(not(debug_assertions), ignore = "the panic is a debug assertion")]
     fn negative_mass_panics() {
         ComputedMass::new(-1.0);
     }
@@ -896,6 +897,7 @@ mod tests {
 
     #[test]
     #[should_panic]
+    #[cfg_attr(not(debug_assertions), ignore = "the panic is a debug assertion")]
     #[cfg(feature = "2d")]
     fn negative_angular_inertia_panics() {
         ComputedAngularInertia::new(-1.0);
@@ -984,6 +986,7 @@ mod tests {
 
     #[test]
     #[should_panic]
+    #[cfg_attr(not(debug_assertions), ignore = "the panic is a debug assertion")]
     #[cfg(feature = "3d")]
     fn negative_angular_inertia_panics() {
         ComputedAngularInertia::new(Vector::new(-1.0, 2.0, 3.0));

@@ -53,6 +53,9 @@ impl Plugin for ColliderTransformPlugin {
             self.schedule,
             propagate_collider_transforms
                 .in_set(PhysicsTransformSystems::Propagate)
+                // Both write `ColliderTransform`, and never in one step: `apply_hierarchy_moves`
+                // runs only under `hierarchy_moves`.
+                .ambiguous_with(crate::physics_transform::apply_hierarchy_moves)
                 .run_if(|config: Res<PhysicsTransformConfig>| !config.hierarchy_moves),
         );
 

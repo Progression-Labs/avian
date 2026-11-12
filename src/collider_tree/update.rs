@@ -136,6 +136,11 @@ impl<C: AnyCollider> Plugin for ColliderTreeUpdatePlugin<C> {
 
         // Case 1
         app.add_observer(add_to_tree_on::<Insert<(C, ColliderOf)>, Without<ColliderDisabled>>);
+        // And a collider with no body that was in no environment when it was inserted, once
+        // it is parented into one.
+        app.add_observer(
+            add_to_tree_on::<crate::environment::AdoptedIntoEnvironment, Without<ColliderDisabled>>,
+        );
 
         // Case 2
         // Note: We also include disabled entities here for the edge case where
@@ -1268,6 +1273,7 @@ mod tests {
             1.0 / 60.0,
         )));
         app.finish();
+        let main_world = crate::tests::test_environment(&mut app);
 
         fn proxy_key(app: &App, entity: Entity) -> ColliderTreeProxyKey {
             *app.world().get::<ColliderTreeProxyKey>(entity).unwrap()
@@ -1289,7 +1295,6 @@ mod tests {
         app.update();
 
         let key = proxy_key(&app, collider);
-        let main_world = app.world().resource::<MainPhysicsEnvironmentEntity>().0;
         let trees = app.world().get::<ColliderTrees>(main_world).unwrap();
         assert!(
             key.is_standalone(),

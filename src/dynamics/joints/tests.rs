@@ -8,7 +8,7 @@ use crate::prelude::*;
 
 const TIMESTEP: f32 = 1.0 / 64.0;
 
-use crate::set_main_world_component as set_component;
+use crate::tests::set_component;
 
 fn create_app() -> App {
     let mut app = App::new();

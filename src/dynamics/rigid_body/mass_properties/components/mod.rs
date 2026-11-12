@@ -1092,6 +1092,7 @@ mod tests {
 
     #[test]
     #[should_panic]
+    #[cfg_attr(not(debug_assertions), ignore = "the panic is a debug assertion")]
     #[cfg(feature = "3d")]
     fn negative_angular_inertia_panics() {
         AngularInertia::new(Vec3::new(-1.0, 2.0, 3.0));

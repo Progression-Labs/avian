@@ -1,7 +1,7 @@
 //! Demonstrates multiple physics worlds with different gravity
 //! and transferring entities between them.
 //!
-//! The left stack (blue) uses the default `MainPhysicsEnvironment` with normal gravity.
+//! The left stack (blue) uses a first `PhysicsEnvironment` with normal gravity.
 //! The right stack (orange) uses a second `PhysicsEnvironment` with reduced gravity.
 //!
 //! Press Space to transfer a random cube from the left world to the right,
@@ -34,6 +34,9 @@ struct BlueCube;
 struct OrangeCube;
 
 #[derive(Resource)]
+struct FirstWorld(Entity);
+
+#[derive(Resource)]
 struct SecondWorld(Entity);
 
 fn setup(
@@ -48,10 +51,22 @@ fn setup(
 
     let cube_size = 1.0;
 
-    // --- Left stack: default world (normal gravity, blue) ---
+    // --- Left stack: first world (normal gravity, blue) ---
+
+    // There is no default world: everything physical is under a `PhysicsEnvironment`.
+    let first_world = commands
+        .spawn((
+            PhysicsEnvironment,
+            Transform::default(),
+            Visibility::default(),
+            Name::new("FirstPhysicsWorld"),
+        ))
+        .id();
+    commands.insert_resource(FirstWorld(first_world));
 
     // Ground
     commands.spawn((
+        ChildOf(first_world),
         Mesh3d(cube_mesh.clone()),
         MeshMaterial3d(ground_material.clone()),
         Transform::from_xyz(-8.0, -2.0, 0.0).with_scale(Vec3::new(12.0, 1.0, 12.0)),
@@ -69,6 +84,7 @@ fn setup(
                     z as f32 * (cube_size + 0.05),
                 );
                 commands.spawn((
+                    ChildOf(first_world),
                     Mesh3d(cube_mesh.clone()),
                     MeshMaterial3d(blue_material.clone()),
                     Transform::from_translation(position).with_scale(Vec3::splat(cube_size as f32)),
@@ -164,7 +180,7 @@ fn transfer_cubes(
     blue_cubes: Query<Entity, With<BlueCube>>,
     orange_cubes: Query<Entity, With<OrangeCube>>,
     second_world: Res<SecondWorld>,
-    main_world: Res<MainPhysicsEnvironmentEntity>,
+    first_world: Res<FirstWorld>,
     mut commands: Commands,
 ) {
     let mut rng = rand::rng();
@@ -196,7 +212,7 @@ fn transfer_cubes(
         if let Some(entity) = orange_cubes.iter().choose(&mut rng) {
             commands.trigger(TransferToEnvironment {
                 entity,
-                world: main_world.0,
+                world: first_world.0,
             });
 
             commands.entity(entity).insert((

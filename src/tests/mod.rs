@@ -16,7 +16,45 @@ use core::time::Duration;
 #[cfg(all(feature = "2d", feature = "enhanced-determinism"))]
 mod determinism_2d;
 
-use crate::set_main_world_component as set_component;
+/// The environment a test's bodies and colliders are in. There is no default environment: one
+/// outside any is reported and not simulated, and these tests spawn theirs at the root, as they
+/// did when there was one.
+#[derive(Resource, Clone, Copy)]
+pub(crate) struct TestEnvironment(pub Entity);
+
+/// The app's [`TestEnvironment`], made on the first call: every rigid body and collider added
+/// from then on that has no parent becomes its child.
+pub(crate) fn test_environment(app: &mut App) -> Entity {
+    if let Some(environment) = app.world().get_resource::<TestEnvironment>() {
+        return environment.0;
+    }
+    let environment = app
+        .world_mut()
+        .spawn((PhysicsEnvironment, Transform::default()))
+        .id();
+    app.insert_resource(TestEnvironment(environment));
+    app.add_observer(adopt::<RigidBody>);
+    #[cfg(feature = "default-collider")]
+    app.add_observer(adopt::<Collider>);
+    environment
+}
+
+fn adopt<C: Component>(
+    add: On<Add<C>>,
+    environment: Res<TestEnvironment>,
+    parents: Query<(), With<ChildOf>>,
+    mut commands: Commands,
+) {
+    if add.entity != environment.0 && !parents.contains(add.entity) {
+        commands.entity(add.entity).insert(ChildOf(environment.0));
+    }
+}
+
+/// Sets a setting of the test's environment (its `Gravity`).
+pub(crate) fn set_component<C: Component>(app: &mut App, component: C) {
+    let environment = test_environment(app);
+    app.world_mut().entity_mut(environment).insert(component);
+}
 
 fn create_app() -> App {
     let mut app = App::new();
@@ -36,6 +74,7 @@ fn create_app() -> App {
     )));
 
     app.finish();
+    test_environment(&mut app);
 
     app
 }
@@ -220,7 +259,7 @@ fn no_ambiguity_errors() {
 mod multiworld {
     use super::*;
     use crate::collider_tree::{ColliderTreeProxyKey, ColliderTrees};
-    use crate::environment::{MainPhysicsEnvironmentEntity, PhysicsEnvironmentEntity};
+    use crate::environment::PhysicsEnvironmentEntity;
 
     fn spawn_ball(app: &mut App) -> Entity {
         app.world_mut()
@@ -256,11 +295,14 @@ mod multiworld {
         let mut app = create_app();
         let other = app.world_mut().spawn(PhysicsEnvironment).id();
         spawn_floor(&mut app, Some(other));
-        let holder = app.world_mut().spawn(Transform::default()).id();
+        let main = test_environment(&mut app);
+        let holder = app
+            .world_mut()
+            .spawn((Transform::default(), ChildOf(main)))
+            .id();
         let ball = spawn_ball(&mut app);
         app.world_mut().entity_mut(ball).insert(ChildOf(holder));
         tick_app(&mut app, 1.0 / 60.0);
-        let main = app.world().resource::<MainPhysicsEnvironmentEntity>().0;
         assert_eq!(
             app.world().get::<PhysicsEnvironmentEntity>(ball).unwrap().0,
             main
@@ -277,7 +319,7 @@ mod multiworld {
             "ball rests on the other world's floor"
         );
 
-        app.world_mut().entity_mut(holder).remove::<ChildOf>();
+        app.world_mut().entity_mut(holder).insert(ChildOf(main));
         app.world_mut().flush();
         assert_eq!(
             app.world().get::<PhysicsEnvironmentEntity>(ball).unwrap().0,
@@ -290,10 +332,10 @@ mod multiworld {
     fn reparented_standalone_collider_moves_to_new_world() {
         let mut app = create_app();
         let other = app.world_mut().spawn(PhysicsEnvironment).id();
-        let main = app.world().resource::<MainPhysicsEnvironmentEntity>().0;
+        let main = test_environment(&mut app);
         let collider = app
             .world_mut()
-            .spawn((Collider::sphere(1.0), Transform::default()))
+            .spawn((Collider::sphere(1.0), Transform::default(), ChildOf(main)))
             .id();
         tick_app(&mut app, 1.0 / 60.0);
         let holds = |app: &App, world: Entity| {
@@ -313,6 +355,38 @@ mod multiworld {
 
         app.world_mut().entity_mut(collider).despawn();
         tick_app(&mut app, 1.0 / 60.0);
+    }
+
+    /// A collider outside every environment has no proxy; parented into one later, it gets it.
+    #[test]
+    fn a_standalone_collider_parented_into_an_environment_later_gets_its_proxy() {
+        let mut app = create_app();
+        let main = test_environment(&mut app);
+        // Under a holder that is in no environment: nothing adopts it.
+        let holder = app.world_mut().spawn(Transform::default()).id();
+        let collider = app
+            .world_mut()
+            .spawn((Collider::sphere(1.0), Transform::default(), ChildOf(holder)))
+            .id();
+        tick_app(&mut app, 1.0 / 60.0);
+        let held = |app: &App| {
+            app.world()
+                .get::<ColliderTreeProxyKey>(collider)
+                .is_some_and(|key| {
+                    app.world()
+                        .get::<ColliderTrees>(main)
+                        .unwrap()
+                        .get_proxy(*key)
+                        .is_some_and(|proxy| proxy.collider == collider)
+                })
+        };
+        assert!(!held(&app), "outside every environment it has no proxy");
+        app.world_mut().entity_mut(holder).insert(ChildOf(main));
+        tick_app(&mut app, 1.0 / 60.0);
+        assert!(
+            held(&app),
+            "parented into an environment, it has its proxy there"
+        );
     }
 
     #[test]

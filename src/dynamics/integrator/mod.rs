@@ -590,6 +590,7 @@ mod tests {
             bevy::scene::ScenePlugin,
             MeshPlugin,
         ));
+        crate::tests::test_environment(&mut app);
         app
     }
 

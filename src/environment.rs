@@ -349,6 +349,13 @@ fn on_transfer_to_environment(trigger: On<TransferToEnvironment>, mut p: Transfe
     transfer(&mut p, entity, from, trigger.event().world, true);
 }
 
+/// A collider with no body that was in no environment and now is in one: the collider tree
+/// gives it its proxy. (A body's collider gets its proxy from its `ColliderOf`, inserted again.)
+#[derive(EntityEvent, Clone, Copy, Debug)]
+pub(crate) struct AdoptedIntoEnvironment {
+    pub(crate) entity: Entity,
+}
+
 /// Moves an entity's physics state between environments after its hierarchy already changed.
 #[derive(EntityEvent, Clone, Copy, Debug)]
 pub(crate) struct RehomeToEnvironment {
@@ -742,6 +749,9 @@ fn drain_rehome(world: &mut World) {
         }
         if let Some(of) = entity.get::<ColliderOf>().copied() {
             entity.insert(of);
+        } else {
+            let entity = entity.id();
+            world.trigger(AdoptedIntoEnvironment { entity });
         }
     }
 }
@@ -751,10 +761,12 @@ fn drain_rehome(world: &mut World) {
 fn is_orphan(world: &World, entity: Entity) -> bool {
     let body = world.get::<BodyIslandNode>(entity).is_some()
         && world.get::<PhysicsEnvironmentEntity>(entity).is_none();
+    // With a body or without: a collider with none had no proxy either, and parented into an
+    // environment was taken for one that had (its key the placeholder), an index past every
+    // tree's proxies when its AABB was next updated.
     let collider = world
         .get::<ColliderTreeProxyKey>(entity)
-        .is_some_and(|key| *key == ColliderTreeProxyKey::PLACEHOLDER)
-        && world.get::<ColliderOf>(entity).is_some();
+        .is_some_and(|key| *key == ColliderTreeProxyKey::PLACEHOLDER);
     body || collider
 }
 

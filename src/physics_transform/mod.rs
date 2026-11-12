@@ -124,7 +124,11 @@ impl Plugin for PhysicsTransformPlugin {
             self.schedule,
             (
                 apply_hierarchy_moves.in_set(PhysicsTransformSystems::Propagate),
-                transform_to_position_moving.in_set(PhysicsTransformSystems::TransformToPosition),
+                // It and `transform_to_position` both write `Position`, and never in one step:
+                // each runs under the other's opposite `hierarchy_moves`.
+                transform_to_position_moving
+                    .in_set(PhysicsTransformSystems::TransformToPosition)
+                    .ambiguous_with(transform_to_position),
             )
                 .run_if(|config: Res<PhysicsTransformConfig>| {
                     config.transform_to_position && config.hierarchy_moves

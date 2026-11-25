@@ -44,6 +44,24 @@ parry3d-f64 = { git = "https://github.com/Progression-Labs/parry", branch = "aur
 parry2d = { git = "https://github.com/Progression-Labs/parry", branch = "aurora" }
 parry2d-f64 = { git = "https://github.com/Progression-Labs/parry", branch = "aurora" }
 
+# The bevy zero builds, as in avian's own workspace (../Cargo.toml): Progression-Labs/bevy on the branch zero's Cargo.toml patches in, so the
+# crate's own tests run against the engine the game does (it uses the fork's API, such as
+# `Gizmos::set_owner`). Only the crates something outside bevy names are listed; the rest come
+# from the fork's own workspace. The branch is copied from zero's
+# `[patch."https://github.com/bevyengine/bevy"]` block (Progression-Labs/zero Cargo.toml): when
+# zero moves to another bevy branch, these ten lines move with it.
+[patch."https://github.com/bevyengine/bevy"]
+bevy = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_app = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_color = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_ecs = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_log = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_math = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_platform = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_reflect = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_shape = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_utils = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+
 [profile.dev]
 # Make the `dev` profile equivalent to the `release` profile
 # so that benchmarks are more realistic even without `--release`.

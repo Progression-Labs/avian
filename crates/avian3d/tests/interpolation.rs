@@ -103,7 +103,11 @@ fn shown_after_teleport(schedule: impl ScheduleLabel, at: u32) -> Vec<f32> {
 /// that ticked `complete_translation_easing` wrote the old easing's end back over the teleport
 /// and the body went on from where it had been (x 0.16 to 0.22, never 50): from `Update` and
 /// `PostUpdate` when the next frame ticked, from `First` and `PreUpdate` when their own did.
-/// Every schedule a game writes from, on frames of either parity against the ticks.
+/// Every schedule a game writes from, on frames of either parity against the ticks. The
+/// teleport's own frame is checked too, which tells something only for `First` and `PreUpdate`
+/// (the fixed ticks and the easing run after them that frame); a write from `Update` or
+/// `PostUpdate` comes after the easing and is trivially shown that frame, and the frames after
+/// it are what test those two.
 #[test]
 fn a_body_teleported_outside_the_fixed_step_is_shown_where_it_was_put() {
     let mut wrong = Vec::new();

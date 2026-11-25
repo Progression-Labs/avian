@@ -78,6 +78,9 @@ avian_derive = { path = "../avian_derive", version = "0.2" }
 bevy = { git = "https://github.com/bevyengine/bevy", branch = "main", default-features = false, features = [
     "std",
     "bevy_log",
+    # Position and Rotation are `Ease` (bevy_curve); a PhysicsEnvironment requires `Visibility`.
+    "bevy_curve",
+    "bevy_camera",
 ] }
 bevy_math = { git = "https://github.com/bevyengine/bevy", branch = "main", features = ["approx"] }
 bevy_shape = { git = "https://github.com/bevyengine/bevy", branch = "main", features = ["approx"] }

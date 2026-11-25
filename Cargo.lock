@@ -1959,7 +1959,7 @@ dependencies = [
 [[package]]
 name = "bevy_transform_interpolation"
 version = "0.6.0-dev"
-source = "git+https://github.com/Progression-Labs/bevy_transform_interpolation?branch=bevy-main#8694897f47a8383a63502875e6b483f112715ce7"
+source = "git+https://github.com/Progression-Labs/bevy_transform_interpolation?branch=bevy-main#a4c0d4bb0d9ee61d774014a552ce2a0e5c3c0c0d"
 dependencies = [
  "bevy",
  "serde",

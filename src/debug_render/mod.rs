@@ -670,12 +670,14 @@ fn debug_render_tracked_spatial_queries(
     length_units: Query<&PhysicsLengthUnit, With<PhysicsEnvironment>>,
 ) {
     let config = store.config::<PhysicsGizmos>().1;
-    // Spatial queries see every environment; their markers take the environments' scale.
-    let length_unit = length_units.iter().next().map_or(1.0, |unit| unit.0);
 
     shape_intersections.clear();
 
-    for query in queries.drain() {
+    // Each query's lines are its environment's (`set_owner`), so a renderer draws them where
+    // that environment is seen, and its markers take that environment's scale.
+    for (environment, query) in queries.drain() {
+        let length_unit = length_units.get(environment).map_or(1.0, |unit| unit.0);
+        gizmos.set_owner(Some(environment));
         match query {
             TrackedSpatialQuery::Raycast {
                 origin,
@@ -762,6 +764,7 @@ fn debug_render_tracked_spatial_queries(
             }
         }
     }
+    gizmos.set_owner(None);
 }
 
 type MeshVisibilityQueryFilter = (

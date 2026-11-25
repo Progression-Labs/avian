@@ -7,8 +7,9 @@ use bevy::{ecs::entity::hash_set::EntityHashSet, prelude::*, utils::Parallel};
 //       and exposing it as a more general way to record spatial queries.
 #[derive(Resource, Deref, DerefMut, Default)]
 pub struct TrackedSpatialQueries {
+    /// Each query with the [`PhysicsEnvironment`] it was made in, whose lines it draws as.
     #[deref]
-    queries: Parallel<Vec<TrackedSpatialQuery>>,
+    queries: Parallel<Vec<(Entity, TrackedSpatialQuery)>>,
     /// Whether spatial queries should be tracked, mirroring [`GizmoConfig::enabled`]
     /// for [`PhysicsGizmos`].
     ///

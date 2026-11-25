@@ -77,6 +77,7 @@ impl<'w, 's> SpatialQuery<'w, 's> {
     /// environment; there is no query over all of them (their frames differ).
     pub fn in_environment(&self, environment: Entity) -> EnvironmentSpatialQuery<'_, 'w, 's> {
         EnvironmentSpatialQuery {
+            environment,
             colliders: &self.colliders,
             aabbs: &self.aabbs,
             trees: self.collider_trees.get(environment).ok(),
@@ -100,6 +101,7 @@ impl<'w, 's> SpatialQuery<'w, 's> {
 
 /// [`SpatialQuery`] scoped to one [`PhysicsEnvironment`] (see [`SpatialQuery::in_environment`]).
 pub struct EnvironmentSpatialQuery<'a, 'w, 's> {
+    environment: Entity,
     colliders: &'a Query<'w, 's, (&'static Position, &'static Rotation, &'static Collider)>,
     aabbs: &'a Query<'w, 's, &'static ColliderAabb>,
     trees: Option<&'a ColliderTrees>,
@@ -108,6 +110,11 @@ pub struct EnvironmentSpatialQuery<'a, 'w, 's> {
 }
 
 impl EnvironmentSpatialQuery<'_, '_, '_> {
+    /// The [`PhysicsEnvironment`] this queries.
+    pub fn environment(&self) -> Entity {
+        self.environment
+    }
+
     /// The environment's trees (none for an entity that is no environment).
     fn all_trees(&self) -> impl Iterator<Item = &crate::collider_tree::ColliderTree> {
         self.trees.into_iter().flat_map(|trees| trees.iter_trees())
@@ -120,7 +127,9 @@ impl EnvironmentSpatialQuery<'_, '_, '_> {
         if let Some(tracked_queries) = self.tracked_queries
             && tracked_queries.enabled
         {
-            tracked_queries.borrow_local_mut().push(query());
+            tracked_queries
+                .borrow_local_mut()
+                .push((self.environment, query()));
         }
     }
 

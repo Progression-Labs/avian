@@ -91,7 +91,7 @@ fn shown_after_teleport(schedule: impl ScheduleLabel, at: u32) -> Vec<f32> {
     let mut shown = Vec::new();
     for frame in 0..at + 6 {
         app.update();
-        if frame > at {
+        if frame >= at {
             shown.push(app.world().get::<Transform>(body).unwrap().translation.x);
         }
     }

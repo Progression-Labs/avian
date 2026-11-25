@@ -14,7 +14,9 @@ opt-level = 1 # Use slightly better optimization, so examples work
 # The bevy zero builds: Progression-Labs/bevy on the branch zero's Cargo.toml patches in, so the
 # crate's own tests run against the engine the game does (it uses the fork's API, such as
 # `Gizmos::set_owner`). Only the crates something outside bevy names are listed; the rest come
-# from the fork's own workspace.
+# from the fork's own workspace. The branch is copied from zero's
+# `[patch."https://github.com/bevyengine/bevy"]` block (Progression-Labs/zero Cargo.toml): when
+# zero moves to another bevy branch, these ten lines move with it.
 [patch."https://github.com/bevyengine/bevy"]
 bevy = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
 bevy_app = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }

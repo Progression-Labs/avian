@@ -268,6 +268,12 @@ dependencies = [
 ]
 
 [[package]]
+name = "anyhow"
+version = "1.0.105"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "2cb931c189b85683d69a5cfad41d4d418671e1ac413dd209f3f2fc31e3cfd902"
+
+[[package]]
 name = "approx"
 version = "0.5.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -543,7 +549,7 @@ checksum = "ac07cdecf99051d9a5238b80f35af32cdeba5b336e55d957b318b50137e18da5"
 [[package]]
 name = "bevy"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_internal",
 ]
@@ -551,7 +557,7 @@ dependencies = [
 [[package]]
 name = "bevy_a11y"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "accesskit",
  "bevy_app",
@@ -564,7 +570,7 @@ dependencies = [
 [[package]]
 name = "bevy_android"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "android-activity",
 ]
@@ -572,7 +578,7 @@ dependencies = [
 [[package]]
 name = "bevy_animation"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_animation_macros",
  "bevy_app",
@@ -606,7 +612,7 @@ dependencies = [
 [[package]]
 name = "bevy_animation_macros"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_macro_utils",
  "quote",
@@ -616,7 +622,7 @@ dependencies = [
 [[package]]
 name = "bevy_anti_alias"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -638,7 +644,7 @@ dependencies = [
 [[package]]
 name = "bevy_app"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_derive",
  "bevy_ecs",
@@ -659,7 +665,7 @@ dependencies = [
 [[package]]
 name = "bevy_asset"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "async-broadcast",
  "async-channel",
@@ -703,7 +709,7 @@ dependencies = [
 [[package]]
 name = "bevy_asset_macros"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_macro_utils",
  "proc-macro2",
@@ -714,7 +720,7 @@ dependencies = [
 [[package]]
 name = "bevy_audio"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -727,9 +733,51 @@ dependencies = [
 ]
 
 [[package]]
+name = "bevy_bsn"
+version = "0.20.0-dev"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
+dependencies = [
+ "thiserror 2.0.20",
+]
+
+[[package]]
+name = "bevy_bsn_asset"
+version = "0.20.0-dev"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
+dependencies = [
+ "bevy_app",
+ "bevy_asset",
+ "bevy_bsn",
+ "bevy_ecs",
+ "bevy_platform",
+ "bevy_reflect",
+ "bevy_scene",
+ "thiserror 2.0.20",
+ "tracing",
+]
+
+[[package]]
+name = "bevy_bsn_document"
+version = "0.20.0-dev"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
+dependencies = [
+ "bevy_app",
+ "bevy_asset",
+ "bevy_bsn",
+ "bevy_ecs",
+ "bevy_platform",
+ "bevy_reflect",
+ "log",
+ "path-slash",
+ "pathdiff",
+ "smol_str",
+ "thiserror 2.0.20",
+]
+
+[[package]]
 name = "bevy_camera"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -755,7 +803,7 @@ dependencies = [
 [[package]]
 name = "bevy_clipboard"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "arboard",
  "bevy_app",
@@ -770,7 +818,7 @@ dependencies = [
 [[package]]
 name = "bevy_color"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_curve",
  "bevy_math",
@@ -786,7 +834,7 @@ dependencies = [
 [[package]]
 name = "bevy_core_pipeline"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -815,7 +863,7 @@ dependencies = [
 [[package]]
 name = "bevy_curve"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "approx",
  "bevy_math",
@@ -829,7 +877,7 @@ dependencies = [
 [[package]]
 name = "bevy_derive"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_macro_utils",
  "quote",
@@ -839,7 +887,7 @@ dependencies = [
 [[package]]
 name = "bevy_dev_tools"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_animation",
  "bevy_app",
@@ -847,6 +895,7 @@ dependencies = [
  "bevy_audio",
  "bevy_camera",
  "bevy_color",
+ "bevy_core_pipeline",
  "bevy_diagnostic",
  "bevy_ecs",
  "bevy_extract",
@@ -856,6 +905,7 @@ dependencies = [
  "bevy_log",
  "bevy_math",
  "bevy_mesh",
+ "bevy_pbr",
  "bevy_picking",
  "bevy_platform",
  "bevy_reflect",
@@ -867,20 +917,23 @@ dependencies = [
  "bevy_time",
  "bevy_transform",
  "bevy_ui",
+ "bevy_ui_render",
  "bevy_ui_widgets",
  "bevy_utils",
  "bevy_window",
  "bevy_world_serialization",
+ "ron",
  "serde",
  "serde_json",
  "strsim",
+ "thiserror 2.0.20",
  "tracing",
 ]
 
 [[package]]
 name = "bevy_diagnostic"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "atomic-waker",
  "bevy_app",
@@ -897,7 +950,7 @@ dependencies = [
 [[package]]
 name = "bevy_ecs"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "arrayvec",
  "bevy_ecs_macros",
@@ -924,7 +977,7 @@ dependencies = [
 [[package]]
 name = "bevy_ecs_macro_logic"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_macro_utils",
  "proc-macro2",
@@ -935,7 +988,7 @@ dependencies = [
 [[package]]
 name = "bevy_ecs_macros"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_ecs_macro_logic",
  "bevy_macro_utils",
@@ -947,7 +1000,7 @@ dependencies = [
 [[package]]
 name = "bevy_encase_derive"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_macro_utils",
  "encase_derive_impl",
@@ -956,7 +1009,7 @@ dependencies = [
 [[package]]
 name = "bevy_extract"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_camera",
@@ -973,7 +1026,7 @@ dependencies = [
 [[package]]
 name = "bevy_extract_macros"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_macro_utils",
  "proc-macro2",
@@ -984,7 +1037,7 @@ dependencies = [
 [[package]]
 name = "bevy_feathers"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "accesskit",
  "bevy_a11y",
@@ -1015,7 +1068,7 @@ dependencies = [
 [[package]]
 name = "bevy_gilrs"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_ecs",
@@ -1030,7 +1083,7 @@ dependencies = [
 [[package]]
 name = "bevy_gizmos"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -1054,7 +1107,7 @@ dependencies = [
 [[package]]
 name = "bevy_gizmos_macros"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_macro_utils",
  "quote",
@@ -1064,7 +1117,7 @@ dependencies = [
 [[package]]
 name = "bevy_gizmos_render"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -1094,7 +1147,7 @@ dependencies = [
 [[package]]
 name = "bevy_gltf"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "async-lock",
  "base64",
@@ -1130,6 +1183,7 @@ dependencies = [
 [[package]]
 name = "bevy_heavy"
 version = "0.6.0-dev"
+source = "git+https://github.com/Progression-Labs/bevy_heavy?branch=bevy-main#0f963997b41ed7cc180ead789d9f14e0dd662b2a"
 dependencies = [
  "approx",
  "bevy_math",
@@ -1142,7 +1196,7 @@ dependencies = [
 [[package]]
 name = "bevy_image"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -1170,7 +1224,7 @@ dependencies = [
 [[package]]
 name = "bevy_input"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_ecs",
@@ -1187,7 +1241,7 @@ dependencies = [
 [[package]]
 name = "bevy_input_focus"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_camera",
@@ -1204,7 +1258,7 @@ dependencies = [
 [[package]]
 name = "bevy_internal"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_a11y",
  "bevy_android",
@@ -1213,6 +1267,9 @@ dependencies = [
  "bevy_app",
  "bevy_asset",
  "bevy_audio",
+ "bevy_bsn",
+ "bevy_bsn_asset",
+ "bevy_bsn_document",
  "bevy_camera",
  "bevy_clipboard",
  "bevy_color",
@@ -1242,6 +1299,7 @@ dependencies = [
  "bevy_post_process",
  "bevy_ptr",
  "bevy_reflect",
+ "bevy_remote",
  "bevy_render",
  "bevy_scene",
  "bevy_shader",
@@ -1265,7 +1323,7 @@ dependencies = [
 [[package]]
 name = "bevy_light"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -1292,7 +1350,7 @@ dependencies = [
 [[package]]
 name = "bevy_log"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "android_log-sys",
  "bevy_app",
@@ -1309,7 +1367,7 @@ dependencies = [
 [[package]]
 name = "bevy_macro_utils"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1320,7 +1378,7 @@ dependencies = [
 [[package]]
 name = "bevy_material"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_asset",
  "bevy_derive",
@@ -1342,7 +1400,7 @@ dependencies = [
 [[package]]
 name = "bevy_material_macros"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_macro_utils",
  "quote",
@@ -1352,7 +1410,7 @@ dependencies = [
 [[package]]
 name = "bevy_math"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "approx",
  "bevy_reflect",
@@ -1368,7 +1426,7 @@ dependencies = [
 [[package]]
 name = "bevy_mesh"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -1402,7 +1460,7 @@ checksum = "bff34eb29ff4b8a8688bc7299f14fb6b597461ca80fec03ed7d22939ab33e48f"
 [[package]]
 name = "bevy_mod_debugdump"
 version = "0.14.0"
-source = "git+https://github.com/slyedoc/bevy_mod_debugdump?branch=bevy-main#8339ee6a415e6033d79e5f41426bd44e954c8f48"
+source = "git+https://github.com/Progression-Labs/bevy_mod_debugdump?branch=bevy-main#8339ee6a415e6033d79e5f41426bd44e954c8f48"
 dependencies = [
  "bevy_app",
  "bevy_color",
@@ -1417,7 +1475,7 @@ dependencies = [
 [[package]]
 name = "bevy_pbr"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "arrayvec",
  "bevy_app",
@@ -1461,7 +1519,7 @@ dependencies = [
 [[package]]
 name = "bevy_picking"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -1485,8 +1543,9 @@ dependencies = [
 [[package]]
 name = "bevy_platform"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
+ "async-io",
  "bytemuck",
  "critical-section",
  "foldhash 0.2.0",
@@ -1501,13 +1560,13 @@ dependencies = [
  "wasm-bindgen",
  "wasm-bindgen-futures",
  "web-time",
- "windows-sys 0.61.2",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
 name = "bevy_post_process"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -1533,12 +1592,12 @@ dependencies = [
 [[package]]
 name = "bevy_ptr"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 
 [[package]]
 name = "bevy_reflect"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "assert_type_match",
  "bevy_platform",
@@ -1566,7 +1625,7 @@ dependencies = [
 [[package]]
 name = "bevy_reflect_derive"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_macro_utils",
  "indexmap",
@@ -1577,9 +1636,37 @@ dependencies = [
 ]
 
 [[package]]
+name = "bevy_remote"
+version = "0.20.0-dev"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
+dependencies = [
+ "anyhow",
+ "async-channel",
+ "async-io",
+ "bevy_app",
+ "bevy_asset",
+ "bevy_color",
+ "bevy_derive",
+ "bevy_dev_tools",
+ "bevy_diagnostic",
+ "bevy_ecs",
+ "bevy_log",
+ "bevy_platform",
+ "bevy_reflect",
+ "bevy_render",
+ "bevy_tasks",
+ "bevy_utils",
+ "http-body-util",
+ "hyper",
+ "serde",
+ "serde_json",
+ "smol-hyper",
+]
+
+[[package]]
 name = "bevy_render"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "async-channel",
  "bevy_app",
@@ -1636,7 +1723,7 @@ dependencies = [
 [[package]]
 name = "bevy_render_macros"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_extract_macros",
  "bevy_macro_utils",
@@ -1648,7 +1735,7 @@ dependencies = [
 [[package]]
 name = "bevy_scene"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -1667,7 +1754,7 @@ dependencies = [
 [[package]]
 name = "bevy_scene_macros"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_ecs_macro_logic",
  "bevy_macro_utils",
@@ -1679,7 +1766,7 @@ dependencies = [
 [[package]]
 name = "bevy_shader"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_asset",
  "bevy_platform",
@@ -1695,7 +1782,7 @@ dependencies = [
 [[package]]
 name = "bevy_shape"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "approx",
  "arrayvec",
@@ -1711,7 +1798,7 @@ dependencies = [
 [[package]]
 name = "bevy_sprite"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -1736,7 +1823,7 @@ dependencies = [
 [[package]]
 name = "bevy_sprite_render"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -1772,7 +1859,7 @@ dependencies = [
 [[package]]
 name = "bevy_state"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_ecs",
@@ -1787,7 +1874,7 @@ dependencies = [
 [[package]]
 name = "bevy_state_macros"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_macro_utils",
  "quote",
@@ -1797,7 +1884,7 @@ dependencies = [
 [[package]]
 name = "bevy_tasks"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "async-channel",
  "async-executor",
@@ -1815,7 +1902,7 @@ dependencies = [
 [[package]]
 name = "bevy_text"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -1842,7 +1929,7 @@ dependencies = [
 [[package]]
 name = "bevy_time"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_ecs",
@@ -1856,7 +1943,7 @@ dependencies = [
 [[package]]
 name = "bevy_transform"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_ecs",
@@ -1872,6 +1959,7 @@ dependencies = [
 [[package]]
 name = "bevy_transform_interpolation"
 version = "0.6.0-dev"
+source = "git+https://github.com/Progression-Labs/bevy_transform_interpolation?branch=bevy-main#a80de064a2afe56598bc7612e4a0819ae64eaff1"
 dependencies = [
  "bevy",
  "serde",
@@ -1880,7 +1968,7 @@ dependencies = [
 [[package]]
 name = "bevy_ui"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "accesskit",
  "bevy_a11y",
@@ -1918,7 +2006,7 @@ dependencies = [
 [[package]]
 name = "bevy_ui_render"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_a11y",
  "bevy_app",
@@ -1953,7 +2041,7 @@ dependencies = [
 [[package]]
 name = "bevy_ui_widgets"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "accesskit",
  "bevy_a11y",
@@ -1979,7 +2067,7 @@ dependencies = [
 [[package]]
 name = "bevy_utils"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "async-channel",
  "bevy_platform",
@@ -1992,7 +2080,7 @@ dependencies = [
 [[package]]
 name = "bevy_window"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -2011,7 +2099,7 @@ dependencies = [
 [[package]]
 name = "bevy_winit"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "accesskit",
  "accesskit_winit",
@@ -2043,7 +2131,7 @@ dependencies = [
 [[package]]
 name = "bevy_world_serialization"
 version = "0.20.0-dev"
-source = "git+https://github.com/bevyengine/bevy?branch=main#2d54877355673b95caec61a878c1c008bb10a05e"
+source = "git+https://github.com/Progression-Labs/bevy?branch=claude%2Fbsn-descendant-patch#c587e03b4c082c119e8174f37341ece41dd5f4b4"
 dependencies = [
  "bevy_app",
  "bevy_asset",
@@ -3264,6 +3352,7 @@ dependencies = [
 [[package]]
 name = "glam_matrix_extras"
 version = "0.2.0-dev"
+source = "git+https://github.com/Progression-Labs/glam_matrix_extras?branch=bevy-main#bfaa1e11caedf777ee74bcb766fd165651e91502"
 dependencies = [
  "approx",
  "bevy_reflect",
@@ -3481,10 +3570,58 @@ dependencies = [
 ]
 
 [[package]]
+name = "http-body"
+version = "1.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ca2a8f2913ee65f60facd6a5905613afaa448497a0230cc41ce022d93290bc2c"
+dependencies = [
+ "bytes",
+ "http",
+]
+
+[[package]]
+name = "http-body-util"
+version = "0.1.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "23169fe34a5fbcdd3f3862e78fb9b6fccd5f02a6dc6f732547005d45631ce71c"
+dependencies = [
+ "bytes",
+ "futures-core",
+ "http",
+ "http-body",
+ "pin-project-lite",
+]
+
+[[package]]
 name = "httparse"
 version = "1.10.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6dbf3de79e51f3d586ab4cb9d5c3e2c14aa28ed23d180cf89b4df0454a69cc87"
+
+[[package]]
+name = "httpdate"
+version = "1.0.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "df3b46402a9d5adb4c86a0cf463f42e19994e3ee891101b1841f30a545cb49a9"
+
+[[package]]
+name = "hyper"
+version = "1.13.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "229c6ff5584df4c6becbfe00567128bac768c8cd32ebc8a8366bd81ed072e8f3"
+dependencies = [
+ "atomic-waker",
+ "bytes",
+ "futures-core",
+ "http",
+ "http-body",
+ "httparse",
+ "httpdate",
+ "itoa",
+ "pin-project-lite",
+ "smallvec",
+ "tokio",
+]
 
 [[package]]
 name = "icu_collections"
@@ -5026,6 +5163,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "947f833aaa585cf12b8ec7c0476c98784c49f33b861376ffc84ed92adebf2aba"
 
 [[package]]
+name = "path-slash"
+version = "0.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "1e91099d4268b0e11973f036e885d652fb0b21fedcf69738c627f94db6a44f42"
+
+[[package]]
+name = "pathdiff"
+version = "0.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "df94ce210e5bc13cb6651479fa48d14f601d9858cfe0467f43ae157023b938d3"
+
+[[package]]
 name = "percent-encoding"
 version = "2.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -5913,6 +6062,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "smol-hyper"
+version = "0.1.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7428a49d323867702cd12b97b08a6b0104f39ec13b49117911f101271321bc1a"
+dependencies = [
+ "async-executor",
+ "async-io",
+ "futures-io",
+ "hyper",
+ "pin-project-lite",
+]
+
+[[package]]
 name = "smol_str"
 version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -6217,6 +6379,15 @@ name = "tinyvec_macros"
 version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1f3ccbac311fea05f86f61904b462b55fb3df8837a366dfc601a0161d0532f20"
+
+[[package]]
+name = "tokio"
+version = "1.54.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b52fd3255258d26fac7264ab5a76b53c13367136dc011d3d6ad4f8ed070396a3"
+dependencies = [
+ "pin-project-lite",
+]
 
 [[package]]
 name = "toml_datetime"

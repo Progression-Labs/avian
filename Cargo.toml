@@ -11,13 +11,18 @@ std_instead_of_core = "warn"
 [profile.dev]
 opt-level = 1 # Use slightly better optimization, so examples work
 
-# Use the locally ported bevy-main worktrees for the bevy-coupled crates —
-# the slyedoc GitHub branches lag behind the local ports.
-[patch."https://github.com/Progression-Labs/bevy_heavy"]
-bevy_heavy = { path = "/mnt/code/f/bevy_heavy-main" }
-
-[patch."https://github.com/Progression-Labs/bevy_transform_interpolation"]
-bevy_transform_interpolation = { path = "/mnt/code/f/bevy_transform_interpolation-main" }
-
-[patch."https://github.com/Progression-Labs/glam_matrix_extras"]
-glam_matrix_extras = { path = "/mnt/code/f/glam_matrix_extras" }
+# The bevy zero builds: Progression-Labs/bevy on the branch zero's Cargo.toml patches in, so the
+# crate's own tests run against the engine the game does (it uses the fork's API, such as
+# `Gizmos::set_owner`). Only the crates something outside bevy names are listed; the rest come
+# from the fork's own workspace.
+[patch."https://github.com/bevyengine/bevy"]
+bevy = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_app = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_color = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_ecs = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_log = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_math = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_platform = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_reflect = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_shape = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }
+bevy_utils = { git = "https://github.com/Progression-Labs/bevy", branch = "claude/bsn-descendant-patch" }

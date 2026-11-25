@@ -15,6 +15,10 @@ pub struct ExampleEnvironment(pub Entity);
 /// A startup system that sets the [`ExampleEnvironment`]'s gravity.
 pub fn example_gravity(gravity: Vec2) -> impl Fn(Res<ExampleEnvironment>, Commands) {
     move |environment: Res<ExampleEnvironment>, mut commands: Commands| {
+        #[allow(
+            clippy::useless_conversion,
+            reason = "Vector is DVec2 under the f64 feature"
+        )]
         commands
             .entity(environment.0)
             .insert(Gravity(gravity.into()));

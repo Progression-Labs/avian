@@ -826,7 +826,7 @@ fn prepare_contact_constraints(
                     manifold,
                     manifold_index,
                     narrow_phase_config.match_contacts,
-                    &contact_softness,
+                    contact_softness,
                 );
 
                 if !constraint.points.is_empty() {

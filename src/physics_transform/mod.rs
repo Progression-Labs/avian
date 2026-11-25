@@ -499,12 +499,9 @@ fn compose_to_physics_world(
         return (translation, rotation.normalize());
     };
 
-    loop {
-        let Ok((parent_transform, parent_child_of, is_physics_world)) =
-            ancestors.get(current_parent)
-        else {
-            break;
-        };
+    while let Ok((parent_transform, parent_child_of, is_physics_world)) =
+        ancestors.get(current_parent)
+    {
         // Stop at the PhysicsEnvironment — it defines the coordinate origin.
         if is_physics_world {
             break;

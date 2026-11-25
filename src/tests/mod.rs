@@ -283,6 +283,10 @@ mod multiworld {
         floor.id()
     }
 
+    #[allow(
+        clippy::unnecessary_cast,
+        reason = "Position is f64 under the f64 feature"
+    )]
     fn settle(app: &mut App, ball: Entity) -> f32 {
         for _ in 0..120 {
             tick_app(app, 1.0 / 60.0);

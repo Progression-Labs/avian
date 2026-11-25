@@ -248,7 +248,7 @@ pub struct EnvironmentTransferred {
 
 /// Handles [`TransferToEnvironment`] events.
 ///
-/// Directly manipulates physics state via queries — no deferred SolverBody
+/// Directly manipulates physics state via queries — no deferred `SolverBody`
 /// remove/re-add, so no hook ordering issues and no exclusive environment lock.
 ///
 /// 1. Removes collider proxy from old environment's [`ColliderTrees`]
@@ -449,32 +449,32 @@ fn transfer(
         let next = body_island.next;
 
         // Fix the linked list in the old island.
-        if let Some(prev_entity) = prev {
-            if let Ok(mut prev_node) = body_islands.get_mut(prev_entity) {
-                prev_node.next = next;
-            }
+        if let Some(prev_entity) = prev
+            && let Ok(mut prev_node) = body_islands.get_mut(prev_entity)
+        {
+            prev_node.next = next;
         }
-        if let Some(next_entity) = next {
-            if let Ok(mut next_node) = body_islands.get_mut(next_entity) {
-                next_node.prev = prev;
-            }
+        if let Some(next_entity) = next
+            && let Ok(mut next_node) = body_islands.get_mut(next_entity)
+        {
+            next_node.prev = prev;
         }
 
         // Update the old environment's island.
-        if let Ok((_, _, mut old_islands, _)) = world_state.get_mut(old_world) {
-            if let Some(island) = old_islands.get_mut(old_island_id) {
-                island.body_count = island.body_count.saturating_sub(1);
-                if island.head_body == Some(entity) {
-                    island.head_body = next;
-                }
-                if island.tail_body == Some(entity) {
-                    island.tail_body = prev;
-                }
-                if island.body_count == 0 && island.contact_count == 0 {
-                    old_islands.remove_island(old_island_id);
-                } else {
-                    old_island_survived = true;
-                }
+        if let Ok((_, _, mut old_islands, _)) = world_state.get_mut(old_world)
+            && let Some(island) = old_islands.get_mut(old_island_id)
+        {
+            island.body_count = island.body_count.saturating_sub(1);
+            if island.head_body == Some(entity) {
+                island.head_body = next;
+            }
+            if island.tail_body == Some(entity) {
+                island.tail_body = prev;
+            }
+            if island.body_count == 0 && island.contact_count == 0 {
+                old_islands.remove_island(old_island_id);
+            } else {
+                old_island_survived = true;
             }
         }
 

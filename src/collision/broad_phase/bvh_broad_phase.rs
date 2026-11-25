@@ -104,11 +104,11 @@ fn collect_collision_pairs<H: CollisionHooks>(
                             proxy_type1,
                             proxy_aabb1,
                             proxy1,
-                            &moved_proxies,
+                            moved_proxies,
                             &hooks,
                             &mut commands,
                             &contact_graph,
-                            &joint_graph,
+                            joint_graph,
                             &mut pairs,
                         );
 
@@ -121,11 +121,11 @@ fn collect_collision_pairs<H: CollisionHooks>(
                             proxy_type1,
                             proxy_aabb1,
                             proxy1,
-                            &moved_proxies,
+                            moved_proxies,
                             &hooks,
                             &mut commands,
                             &contact_graph,
-                            &joint_graph,
+                            joint_graph,
                             &mut pairs,
                         );
 
@@ -140,11 +140,11 @@ fn collect_collision_pairs<H: CollisionHooks>(
                                 proxy_type1,
                                 proxy_aabb1,
                                 proxy1,
-                                &moved_proxies,
+                                moved_proxies,
                                 &hooks,
                                 &mut commands,
                                 &contact_graph,
-                                &joint_graph,
+                                joint_graph,
                                 &mut pairs,
                             );
                         }
@@ -158,11 +158,11 @@ fn collect_collision_pairs<H: CollisionHooks>(
                             proxy_type1,
                             proxy_aabb1,
                             proxy1,
-                            &moved_proxies,
+                            moved_proxies,
                             &hooks,
                             &mut commands,
                             &contact_graph,
-                            &joint_graph,
+                            joint_graph,
                             &mut pairs,
                         );
                     }

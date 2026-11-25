@@ -206,8 +206,8 @@ impl ColliderTree {
             let start = node.first_index as usize;
             let end = start + node.prim_count as usize;
 
-            for primitive_id in start..end {
-                let proxy_id = ProxyId::new(bvh.primitive_indices[primitive_id]);
+            for &primitive in &bvh.primitive_indices[start..end] {
+                let proxy_id = ProxyId::new(primitive);
                 if !eval(proxy_id) {
                     return false;
                 }
@@ -231,8 +231,8 @@ impl ColliderTree {
             let start = node.first_index as usize;
             let end = start + node.prim_count as usize;
 
-            for primitive_id in start..end {
-                let proxy_id = ProxyId::new(bvh.primitive_indices[primitive_id]);
+            for &primitive in &bvh.primitive_indices[start..end] {
+                let proxy_id = ProxyId::new(primitive);
                 if !eval(proxy_id) {
                     return false;
                 }

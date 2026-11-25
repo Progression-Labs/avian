@@ -1,7 +1,7 @@
 //! The interpolation plugin in an app as tests build one.
 
 use avian3d::prelude::*;
-use bevy::prelude::*;
+use bevy::{ecs::schedule::ScheduleLabel, prelude::*};
 
 /// An app updated without `App::finish` (as a test's is, with no runner) updates: nothing the
 /// plugin adds in `build` reads what the interpolation plugins add only in `finish` (the easing
@@ -38,7 +38,7 @@ fn an_app_that_was_never_finished_updates() {
 /// What the frame after a teleport shows, frame by frame: a kinematic body moving at 1 m/s
 /// with `TransformInterpolation`, frames at 120 Hz over a 60 Hz fixed step (half the frames
 /// tick), its `Transform` written to x = 50 from `schedule` on frame `at`.
-fn shown_after_teleport(schedule: impl bevy::ecs::schedule::ScheduleLabel, at: u32) -> Vec<f32> {
+fn shown_after_teleport(schedule: impl ScheduleLabel, at: u32) -> Vec<f32> {
     #[derive(Resource)]
     struct Frame(u32);
     #[derive(Resource)]
@@ -62,7 +62,9 @@ fn shown_after_teleport(schedule: impl bevy::ecs::schedule::ScheduleLabel, at: u
     .insert_resource(TeleportAt(at))
     .add_systems(
         schedule,
-        |frame: Res<Frame>, at: Res<TeleportAt>, mut body: Query<&mut Transform, With<Teleported>>| {
+        |frame: Res<Frame>,
+         at: Res<TeleportAt>,
+         mut body: Query<&mut Transform, With<Teleported>>| {
             if frame.0 == at.0 {
                 body.single_mut().unwrap().translation.x = 50.0;
             }
@@ -104,20 +106,23 @@ fn shown_after_teleport(schedule: impl bevy::ecs::schedule::ScheduleLabel, at: u
 /// Every schedule a game writes from, on frames of either parity against the ticks.
 #[test]
 fn a_body_teleported_outside_the_fixed_step_is_shown_where_it_was_put() {
-    let schedules: [(&str, fn(u32) -> Vec<f32>); 4] = [
-        ("First", |at| shown_after_teleport(First, at)),
-        ("PreUpdate", |at| shown_after_teleport(PreUpdate, at)),
-        ("Update", |at| shown_after_teleport(Update, at)),
-        ("PostUpdate", |at| shown_after_teleport(PostUpdate, at)),
-    ];
     let mut wrong = Vec::new();
-    for (name, shown_after) in schedules {
+    for schedule in [
+        First.intern(),
+        PreUpdate.intern(),
+        Update.intern(),
+        PostUpdate.intern(),
+    ] {
         for at in 20..24 {
-            let shown = shown_after(at);
+            let shown = shown_after_teleport(schedule, at);
             if shown.iter().any(|x| !(50.0..50.2).contains(x)) {
-                wrong.push(format!("{name}, frame {at}: {shown:?}"));
+                wrong.push(format!("{schedule:?}, frame {at}: {shown:?}"));
             }
         }
     }
-    assert!(wrong.is_empty(), "shown away from x = 50 after the teleport:\n{}", wrong.join("\n"));
+    assert!(
+        wrong.is_empty(),
+        "shown away from x = 50 after the teleport:\n{}",
+        wrong.join("\n")
+    );
 }

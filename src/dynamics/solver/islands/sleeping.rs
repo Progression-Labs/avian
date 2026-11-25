@@ -289,6 +289,10 @@ fn update_sleeping_states(
             let lin_threshold_squared = sleep_threshold.linear * sleep_threshold.linear.abs();
             let ang_threshold_squared = sleep_threshold.angular * sleep_threshold.angular.abs();
 
+            #[allow(
+                clippy::unnecessary_cast,
+                reason = "the thresholds are f64 under the f64 feature"
+            )]
             if lin_vel_squared < length_unit_squared * lin_threshold_squared as f32
                 && ang_vel_squared < ang_threshold_squared as f32
             {
